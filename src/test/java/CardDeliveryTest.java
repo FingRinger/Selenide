@@ -25,7 +25,7 @@ public class CardDeliveryTest {
         open("http://localhost:9999/");
         $("[placeholder='Город']").setValue("Санкт-Петербург");
 
-        LocalDate date = LocalDate.now().plusDays(4);
+        LocalDate date = LocalDate.now().plusDays(3);
         //%02d - добавить ноль, если меньше 2х символов
         String myDate = String.format("%02d.%02d.%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
 
