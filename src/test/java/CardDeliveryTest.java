@@ -17,34 +17,44 @@ import static org.openqa.selenium.Keys.*;
 
 public class CardDeliveryTest {
 
+    String generateDate(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
 
     @Test
     public void shouldOrderCardWithDelivery() {
         Configuration.holdBrowserOpen = true;
         //    Configuration.browser = "firefox";
+        String meetingDate = generateDate(4);
         open("http://localhost:9999/");
         $("[placeholder='Город']").setValue("Санкт-Петербург");
         $("[data-test-id=date] input").sendKeys(chord(COMMAND, "a"), DELETE);
 
-        LocalDate date = LocalDate.now().plusDays(4);
+       // LocalDate date = LocalDate.now().plusDays(4);
+
         //%02d - добавить ноль, если меньше 2х символов
       //  String myDate = String.format("%02d.%02d.%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
 
-        String myDate = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+     //   String myDate = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
-        $("[placeholder='Дата встречи']").setValue(myDate);
+
+        $("[data-test-id='date'] input").setValue(meetingDate);
+
+      //  $("[placeholder='Дата встречи']").setValue(myDate);
         $("[name='name']").setValue("Чайковский Петр");
         $("[name='phone']").val("+79998887766");
         $("[data-test-id='agreement']").click();
         $(byText("Забронировать")).click();
         $("[data-test-id=notification]").shouldBe(visible, Duration.ofSeconds(15))
-                .shouldHave(exactText("Успешно! Встреча успешно забронирована на " + myDate));
+                .shouldHave(exactText("Успешно! Встреча успешно забронирована на " + meetingDate));
 
     }
 
     @Test
     public void shouldUseAutocompleteAndCalendar() {
         Configuration.holdBrowserOpen = true;
+
+        String meetingDate = generateDate(7);
         open("http://localhost:9999/");
         $("[placeholder='Город']").setValue("Тв");
         $(".input__menu").find(withText("Тверь")).click();
