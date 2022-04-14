@@ -28,9 +28,10 @@ public class CardDeliveryTest {
 
         LocalDate date = LocalDate.now().plusDays(4);
         //%02d - добавить ноль, если меньше 2х символов
-        String myDate = String.format("%02d.%02d.%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
+      //  String myDate = String.format("%02d.%02d.%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
 
-       // $("[data-test-id=date] input").sendKeys(chord(COMMAND, "a"), DELETE);
+        String myDate = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
         $("[placeholder='Дата встречи']").setValue(myDate);
         $("[name='name']").setValue("Чайковский Петр");
         $("[name='phone']").val("+79998887766");
