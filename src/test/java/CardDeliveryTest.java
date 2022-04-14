@@ -24,23 +24,11 @@ public class CardDeliveryTest {
     @Test
     public void shouldOrderCardWithDelivery() {
         Configuration.holdBrowserOpen = true;
-        //    Configuration.browser = "firefox";
         String meetingDate = generateDate(4);
         open("http://localhost:9999/");
         $("[placeholder='Город']").setValue("Санкт-Петербург");
-      //  $("[data-test-id='date'] input").sendKeys(chord(COMMAND, "a"), DELETE);
-
-       // LocalDate date = LocalDate.now().plusDays(4);
-
-        //%02d - добавить ноль, если меньше 2х символов
-      //  String myDate = String.format("%02d.%02d.%d", date.getDayOfMonth(), date.getMonthValue(), date.getYear());
-
-     //   String myDate = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $("[data-test-id='date'] input").doubleClick().sendKeys(Keys.BACK_SPACE);
-
         $("[data-test-id='date'] input").setValue(meetingDate);
-
-      //  $("[placeholder='Дата встречи']").setValue(myDate);
         $("[name='name']").setValue("Чайковский Петр");
         $("[name='phone']").val("+79998887766");
         $("[data-test-id='agreement']").click();
