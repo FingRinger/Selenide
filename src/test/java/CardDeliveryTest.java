@@ -28,7 +28,7 @@ public class CardDeliveryTest {
         String meetingDate = generateDate(4);
         open("http://localhost:9999/");
         $("[placeholder='Город']").setValue("Санкт-Петербург");
-        $("[data-test-id=date] input").sendKeys(chord(COMMAND, "a"), DELETE);
+        $("[data-test-id='date'] input").sendKeys(chord(COMMAND, "a"), DELETE);
 
        // LocalDate date = LocalDate.now().plusDays(4);
 
